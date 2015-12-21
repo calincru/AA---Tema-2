@@ -36,7 +36,7 @@ variabile este aceea că transformarea **T** creează **V^2** variabile, unde
 cu același nume joacă același *rol* în cadrul expresiei (în *ref*-urile generate
 de mine și în output-urile voastre), va trebui să respectați următoarea regulă
 de formare a numelor variabilelor:
-> **xk**, k =_((i - 1)*V + j) = "pe poziția *i* în HP se află nodul *j*; considerăm
+> `xk, k =_((i - 1)*V + j) = pe poziția i în HP se află nodul j`; considerăm
 > indexate de la 1 atât nodurile cât și pozițiile în HP.
 
 Motivul pentru care nu folosim **xij** cu *pe poziția i în HP se află nodul j*
