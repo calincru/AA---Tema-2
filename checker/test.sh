@@ -11,7 +11,7 @@ points_per_test=$((100/tests_nr))
 make -f Makefile.robdd
 
 # Build
-make
+make build
 if [ $? -ne 0 ]; then
     "Makefile failed.  Aborting..."
 else
