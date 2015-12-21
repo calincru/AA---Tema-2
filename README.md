@@ -3,7 +3,7 @@
 Repo-ul conține:
 * enunț
 * **teste** și **script de testare** pentru verificarea corectitudinii.
-* implementare **HP** în **O(N!)** - for the record și ca să fie clar că nu asta
+* implementare **HP** în **O(V!)** - for the record și ca să fie clar că nu asta
   trebuie făcut; *de fapt l-am scris să verific câte din grafurile generate au
   HP.  Am lăsat acolo și dovada*.
 * programul de **generat graf**-uri pe care l-am folosit pentru a genera
@@ -20,9 +20,9 @@ Testele pentru verificarea corectitudinii conțin grafuri cu maxim 7 noduri.
 Motivul pentru care există această limitare **nu este dificultatea** problemei
 **HP**, deoarece nu această problemă trebuie rezolvată, ci transformarea **T**
 pe care ați folosit-o deja pentru a demonstra **HP <p SAT** și care ar trebui să
-ruleze în **O(V^3)**.  Motivul este dificultatea verificării echivalenței a 2
-expresii boolene - practic ceea ce folosim pentru a testa corectitudinea
-reducerii.
+ruleze în **O(V^3)**.  Motivul este dificultatea (aka **NP-Completitudinea**)
+verificării echivalenței a 2 expresii boolene - practic ceea ce folosim pentru a
+testa corectitudinea reducerii.
 
 Așa cum am menționat deja, în fișierul **robdd.cpp** se află deja o implementare
 a acestei probleme.  Această implementare este una destul de bună în practică,
@@ -36,8 +36,8 @@ variabile este aceea că transformarea **T** creează **V^2** variabile, unde
 cu același nume joacă același *rol* în cadrul expresiei (în *ref*-urile generate
 de mine și în output-urile voastre), va trebui să respectați următoarea regulă
 de formare a numelor variabilelor:
-> **xk**, cu k = 1 .. V^2 și fie i = k/V și j = k%V; atunci *pe poziția (i + 1)
-în HP se află nodul (j + 1)*; le-am considerat pe ambele indexate de la 1.
+> **xk**, k =_((i - 1)*V + j) = "pe poziția *i* în HP se află nodul *j*; considerăm
+> indexate de la 1 atât nodurile cât și pozițiile în HP.
 
 Motivul pentru care nu folosim **xij** cu *pe poziția i în HP se află nodul j*
 este că pentru grafuri cu mai mult de 11 noduri, notația devine ambiguă; *x111*

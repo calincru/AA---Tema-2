@@ -8,6 +8,8 @@
 \usepackage{tikz}
 \usepackage{wrapfig}
 \usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
 \begin{document}
 \begin{titlepage}
@@ -23,7 +25,7 @@
   {\large \hspace{4.2cm} {\bf 12 Ianuarie 2016} (60\% punctaj)}
   \vspace{1cm}
 
-  Ultima actualizare: \color{red} \emph{20.12.2015}
+  Ultima actualizare: \color{red} \emph{22.12.2015}
 
   \vfill
 \end{titlepage}
@@ -131,8 +133,8 @@ Fișierul de ieșire va fi {\bf test.out}.
 
 Outputul constă într-o singură linie pe care se va afla o expresie booleană.
 Ca nume de variabile se vor folosi {\bf xk}, $k = 1..V^2$, unde $V$
-este numărul de noduri din graf, cu semnificația: \emph{pe poziția $k/V + 1$ în
-HP se află nodul $k\%V + 1$}.
+este numărul de noduri din graf, cu semnificația: $k = (i - 1)*V + j \implies$
+"al $i$-lea nod vizitat este nodul $j$".
 Pentru disjuncție se va folosi caracterul {\bf V}, pentru conjuncție
 {\bf $\wedge$} (shift - 6), iar pentru negație {\bf $\sim$} (tilda).
 Spațiile vor fi ignorate.
