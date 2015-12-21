@@ -1,6 +1,7 @@
-# Analiza Algoritmilor - Tema 2
+# Analiza Algoritmilor - Tema 4
 
 Repo-ul conține:
+* enunț
 * **teste** și **script de testare** pentru verificarea corectitudinii.
 * implementare **HP** în **O(N!)** - for the record și ca să fie clar că nu asta
   trebuie făcut; *de fapt l-am scris să verific câte din grafurile generate au
@@ -19,7 +20,7 @@ Testele pentru verificarea corectitudinii conțin grafuri cu maxim 7 noduri.
 Motivul pentru care există această limitare **nu este dificultatea** problemei
 **HP**, deoarece nu această problemă trebuie rezolvată, ci transformarea **T**
 pe care ați folosit-o deja pentru a demonstra **HP <p SAT** și care ar trebui să
-ruleze în **O(V^3)**.  Motivul este dificultatea verificării echivalenței a 2 
+ruleze în **O(V^3)**.  Motivul este dificultatea verificării echivalenței a 2
 expresii boolene - practic ceea ce folosim pentru a testa corectitudinea
 reducerii.
 
@@ -38,11 +39,19 @@ de formare a numelor variabilelor:
 > **xk**, cu k = 1 .. V^2 și fie i = k/V și j = k%V; atunci *pe poziția (i + 1)
 în HP se află nodul (j + 1)*; le-am considerat pe ambele indexate de la 1.
 
-Motivul pentru care nu folosim **xij** cu *pe poziție i în HP se află nodul j*
-este că pentru grafuri cu mai mult de 11 noduri, notația devine ambigua; *x111*
+Motivul pentru care nu folosim **xij** cu *pe poziția i în HP se află nodul j*
+este că pentru grafuri cu mai mult de 11 noduri, notația devine ambiguă; *x111*
 înseamnă poziția 1 - nodul 11 sau poziția 11 - nodul 1?
 
-**ATENȚIE!!** la ultimele 2 teste.  Dacă știți că aveți un computer cu resurse
-limitate, mai bine nu le rulați.  Din testele mele, acestea mănâncă în jur de
-2GB RAM.
+**Notă 1**:  Ultimele 2 teste mănâncă foarte multe resurse.  Dacă știți că aveți
+un computer cu resurse limitate, mai bine nu le rulați.  Din testele mele,
+acestea mănâncă în jur de 2GB RAM.
+
+**Notă 2**:  Rularea testelor implică rularea programului **robdd.cpp** care
+pentru compilare are nevoie de un compilator care suportă măcar una dintre
+primele implementări ale C++11 (numită C++0x); spre exemplu, gcc 4.7 ar trebui
+să meargă.  Dacă nu aveți și nu puteți face rost de un astfel de compilator,
+puteți rula pe **fep.grid.pub.ro** unde vă autentificați cu numele de pe
+cs.curs.  Pentru a loada **gcc 4.7** trebuie sa rulați 
+`$ module load compilers/gnu-4.7.0`.
 
