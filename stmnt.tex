@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+
+\usepackage{xcolor}
+\usepackage[utf8x]{inputenc}
+\usepackage[colorlinks, allcolors=blue]{hyperref}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{amsfonts}
+
+\begin{document}
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Large Analiza Algoritmilor}
+
+  {\Large Tema 4 - Implementarea unei Reduceri Polinomiale}
+  \vspace{2cm}
+
+  {\large Termen de predare: {\bf 5 Ianuarie 2016} (100\% punctaj)}
+
+  {\large \hspace{4.2cm} {\bf 12 Ianuarie 2016} (60\% punctaj)}
+  \vspace{1cm}
+
+  Ultima actualizare: \color{red} \emph{20.12.2015}
+
+  \vfill
+\end{titlepage}
+
+\section{Introducere}
+O \emph{reducere Turing} $A \leq_T B$, unde $A$ și $B$ sunt probleme,
+ne spune că $B$ este \emph{cel puțin la fel de grea} ca $A$, sau, cu alte
+cuvinte, dacă putem rezolva $B$ atunci putem rezolva și $A$ folosind o
+transformare \emph{calculabiă} $T$.
+
+O \emph{reducere polinomială}\cite{1} $A \leq_p B$, adaugă o
+constrângere la definiția de mai sus: transformarea $T$ a unei instanțe a
+problemei $A$ într-o instanță a problemei $B$ poate fi calculată în timp
+polinomial ($\exists c \in \mathbb{N}, T = O(n^c)$).
+
+Ne propunem ilustrarea unei astfel de reduceri polinomiale prin implementarea
+transformării $T$, adică proiectarea și implementarea unui algoritm care
+transformă instanța $in_A$ a problemei $A$, într-o instanță $in_B = T(in_A)$ a
+problemei $B$, a.î. $A(in_A) = B(in_B)$, pentru orice $in_A$.
+
+{\bf Notă}: Ultima egalitate din paragraful de mai sus este ceea ce face ca
+transformarea să fie {\bf corectă}.
+
+\section{Hamiltonian Path \& SAT}
+Un \emph{lanț hamiltonian}\cite{2} într-un graf neorientat $G = (V, E)$ este un
+lanț care vizitează fiecare nod \emph{exact} o dată.
+Formal, un lanț hamiltonian poate fi exprimat ca o permutare $\pi$ a mulțimii
+$\{1, 2, ..., n\}$, a.î:
+
+\begin{itemize}
+  \setlength{\itemsep}{0em}
+  \item $\pi(i) = j$ $\iff$ al $i$-lea nod vizitat este nodul $j$
+  \item $(\pi(i), \pi(i + 1)) \in E \mbox{ for } i = 1,...,n-1$
+\end{itemize}
+
+Problema de decizie {\bf HP} se enunță astfel:
+
+\paragraph{}
+\emph{Are graful $G$ un lanț hamiltonian}?\vspace{1em}
+
+Reamintim problema de decizie {\bf SAT}\cite{3}:
+
+\paragraph{}
+\emph{Dându-se o expresie booleană $\varphi$, există o interpretare $I$ astfel
+încât $I \models \varphi$?}\vspace{1em}
+
+\section{Cerință}
+Se cere implementarea reducerii {$HP \leq_p SAT$} într-un limbaj de
+programare \emph{la alegere}.
+
+Programul va primi ca input un graf neorientat și va trebui să returneze
+expresia booleană rezultată ca urmare a aplicării unei tehnici de reducere
+{\bf corectă}.
+
+Alături de codul sursă, va fi necesară includerea unui \emph{Makefile} cu
+următoarele target-uri:
+
+\begin{itemize}
+  \setlength{\itemsep}{0em}
+  \item {\bf build}: compilează codul sursă (dacă este cazul)
+  \item {\bf run}: rulează programul
+  \item {\bf clean}: șterge toate fișierele generate de target-urile
+    anterioare, cu excepția celui de output.
+\end{itemize}
+
+{\bf Notă}: \emph{make build}, \emph{make run}, \emph{make clean} vor trebui
+să fie comenzi valide din root-ul arhivei trimise.
+
+\subsection{Input}
+Fișierul de intrare va fi {\bf test.in}.
+
+Pe prima linie se vor afla 2 numere, $V, E$, reprezentând numărul de noduri
+din graf, respectiv numărul de muchii ale grafului.
+Pe fiecare din următoarele $E$ linii se va afla câte o pereche de forma
+$(u, v)$, $1 \le u, v \le V$, cu semnificația \emph{există muchie între nodul
+$u$ și nodul $v$}.
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \raggedright
+  % Draw graph
+  \tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=0pt]
+  \tikzstyle{edge} = [draw,thick,-]
+
+  \begin{tikzpicture}[remember picture, xscale=1.8]
+    % Draw nodes
+    \foreach \pos/\name in {{(0,0)/1}, {(1, 1)/2}, {(2, 1)/3},
+                            {(3,0)/4}, {(1,-1)/5}}
+      \node[vertex] (\name) at \pos {$\name$};
+
+    % Draw edges
+    \foreach \source/\dest in {1/5, 5/4, 5/3, 3/2}
+      \path[edge] (\source) -- (\dest);
+  \end{tikzpicture}
+\end{wrapfigure}
+
+\paragraph{Exemplu}\mbox{}\par
+5 4\\
+1 5\\
+5 4\\
+5 3\\
+3 2
+
+\subsection{Output}
+Fișierul de ieșire va fi {\bf test.out}.
+
+Outputul constă într-o singură linie pe care se va afla o expresie booleană.
+Ca nume de variabile se vor folosi, în ordine, {\bf xi}, $i = 1..N$, unde $N$
+este numărul de variabile necesare.
+Pentru disjuncție se va folosi caracterul {\bf V}, pentru conjuncție
+{\bf $\wedge$} (shift - 6), iar pentru negație {\bf $\sim$} (tilda).
+Spațiile vor fi ignorate.
+
+{\bf Notă}: Deoarece nu definim precedența celor 3 operatori,
+se vor folosi paranteze rotunde oriunde există ambiguități. Spre exemplu,
+expresia {\bf x1$\wedge$x2$\vee$x3} nu este validă. În schimb,
+{\bf (x1$\wedge$x2)$\vee$x3}, {\bf x1$\wedge$(x2$\vee$x3)},
+{\bf x1$\vee$x2$\vee$x3$\vee$x4} și {\bf x1$\vee$$\sim$x2} sunt expresii valide.
+
+\section{Punctaj}
+Tema valorează {\bf 0.5 puncte} din nota finală. Testarea va fi automată.
+
+\section{Referințe}
+\renewcommand{\section}[2]{}%
+\begin{thebibliography}{9}
+  \bibitem[1]{1}
+    Polynomial-time reduction\newline
+    \url{https://en.wikipedia.org/wiki/Polynomial-time_reduction}
+  \bibitem[2]{2}
+    Hamiltonian path\newline
+    \url{https://en.wikipedia.org/wiki/Hamiltonian_path}
+  \bibitem[3]{3}
+    Boolean satisfiability problem\newline
+    \url{https://en.wikipedia.org/wiki/Boolean_satisfiability_problem}
+\end{thebibliography}
+
+\end{document}

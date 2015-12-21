@@ -1,0 +1,6 @@
+CXXFLAGS := -std=c++0x -Wall -Werror -Wextra -pedantic -O3 # -DDEBUG -g
+
+robdd: robdd.cpp
+
+clean:
+	@rm robdd &>/dev/null || true
