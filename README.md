@@ -35,11 +35,11 @@ variabile este aceea că transformarea **T** creează **V^2** variabile, unde
 **V** e numărul de noduri din graf.  Astfel, pentru a ne asigura că variabilele
 cu același nume joacă același *rol* în cadrul expresiei (în *ref*-urile generate
 de mine și în output-urile voastre), va trebui să respectați următoarea regulă
-de formare a numelor variabilelor:
-> `xk, k =_((i - 1)*V + j) = pe poziția i în HP se află nodul j`; considerăm
-> indexate de la 1 atât nodurile cât și pozițiile în HP.
+de formare a numelor variabilelor: `xk, k = ((i - 1)*V + j) = pe poziția i în HP
+se află nodul j`; considerăm indexate de la 1 atât nodurile cât și pozițiile în
+HP.
 
-Motivul pentru care nu folosim **xij** cu *pe poziția i în HP se află nodul j*
+Motivul pentru care nu folosim `xij, pe poziția i în HP se află nodul j`
 este că pentru grafuri cu mai mult de 11 noduri, notația devine ambiguă; *x111*
 înseamnă poziția 1 - nodul 11 sau poziția 11 - nodul 1?
 
