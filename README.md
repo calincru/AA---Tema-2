@@ -4,13 +4,13 @@ Repo-ul conține:
 * **teste** și **script de testare** pentru verificarea corectitudinii.
 * implementare **HP** în **O(N!)** - for the record și ca să fie clar că nu asta
   trebuie făcut; *de fapt l-am scris să verific câte din grafurile generate au
-  HP.  Am lăsat acolo și dovada.*.
+  HP.  Am lăsat acolo și dovada*.
 * programul de **generat graf**-uri pe care l-am folosit pentru a genera
   testele și pe care cel mai probabil îl voi folosi pentru a le genera și pe
   cele private; îl puteți folosi să vă generați noi teste.
 * directorul `tests/efficiency` care va conține teste private pentru verificarea
   complexității polinomiale a algoritmilor; da da, e nedecidabil - *let me deal
-  with that*
+  with that*.
 * **robdd.cpp** - implementarea echivalenței expresiilor boolene folosind
   [Reduced Ordered Binary Decision Diagrams](https://en.wikipedia.org/wiki/Binary_decision_diagram).
   Este folosit ca subrutină de scriptul de testare.
@@ -32,10 +32,11 @@ proprietățile **ROBDD** în link-ul de mai sus.
 Legătura dintre grafurile cu 7 noduri și expresiile boolene cu 49-50 de
 variabile este aceea că transformarea **T** creează **V^2** variabile, unde
 **V** e numărul de noduri din graf.  Astfel, pentru a ne asigura că variabilele
-cu același nume joacă același *rol* în cadrul expresiei, va trebui să respectați
-următoarea regulă de formare a numelor variabilelor:
-> **xk**, cu k = 1 .. V^2 și fie i = k/V și j = k%V; atunci *pe poziția i în HP
-se află nodul j*.
+cu același nume joacă același *rol* în cadrul expresiei (în *ref*-urile generate
+de mine și în output-urile voastre), va trebui să respectați următoarea regulă
+de formare a numelor variabilelor:
+> **xk**, cu k = 1 .. V^2 și fie i = k/V și j = k%V; atunci *pe poziția (i + 1)
+în HP se află nodul (j + 1)*; le-am considerat pe ambele indexate de la 1.
 
 Motivul pentru care nu folosim **xij** cu *pe poziție i în HP se află nodul j*
 este că pentru grafuri cu mai mult de 11 noduri, notația devine ambigua; *x111*
